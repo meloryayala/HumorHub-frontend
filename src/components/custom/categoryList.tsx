@@ -4,30 +4,38 @@ import {Button} from "@/components/ui/button";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-interface CategoriesData {
+interface CategoryList {
     id: number;
     name: string;
 }
 
 export const CategoryList = () => {
-    const [categories, setCategories] = useState<CategoriesData[]>([]);
+    const [categories, setData] = useState<CategoryList[]>([]);
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-       axios.get("https://backend.melory.codery.ch/category")
-           .then(response => {
-               setCategories(response.data)
-           })
-    },[]);
+    const getData = (URL: string) =>  {
+        axios.get(URL)
+            .then(response => {
+                setData(response.data);
+                setLoading(false);
+            }).catch(error => {
+            setLoading(false);
+            setError(error.message)
+        })
+    }
 
-    console.log(categories)
-
+    useEffect(()=> {
+        getData("https://backend.melory.codery.ch/category")
+    })
 
     return (
         <div className="flex">
             <Button variant="outline">
                 🏷️ Category name
             </Button>
-
+            {error && error}
+            {loading && loading}
             {
                 categories.map(category => (
                     <Button key={category.id} variant="outline">
