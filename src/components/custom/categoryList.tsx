@@ -4,20 +4,20 @@ import {Button} from "@/components/ui/button";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-interface CategoryList {
+export interface CategoryType {
     id: number;
     name: string;
 }
 
 export const CategoryList = () => {
-    const [categories, setData] = useState<CategoryList[]>([]);
+    const [categories, setCategories] = useState<CategoryList[]>([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
 
-    const getData = (URL: string) =>  {
+    const getData = (URL: string) => {
         axios.get(URL)
             .then(response => {
-                setData(response.data);
+                setCategories(response.data);
                 setLoading(false);
             }).catch(error => {
             setLoading(false);
@@ -25,24 +25,25 @@ export const CategoryList = () => {
         })
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         getData("https://backend.melory.codery.ch/category")
-    })
+    }, [])
 
     return (
-        <div className="flex">
-            <Button variant="outline">
-                🏷️ Category name
-            </Button>
+        <div>
             {error && error}
             {loading && loading}
-            {
-                categories.map(category => (
-                    <Button key={category.id} variant="outline">
+            <div className="flex">
+                <Button variant="outline">
+                    🏷️ Category name
+                </Button>
+
+                {categories.map(category => (
+                    <Button key={category.name} variant="outline">
                         {category.name}
                     </Button>
-                ))
-            }
+                ))}
+            </div>
         </div>
     );
 };
