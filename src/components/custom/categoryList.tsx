@@ -10,7 +10,7 @@ export interface CategoryType {
 }
 
 export const CategoryList = () => {
-    const [categories, setCategories] = useState<CategoryList[]>([]);
+    const [categories, setCategories] = useState<CategoryType[]>([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
 

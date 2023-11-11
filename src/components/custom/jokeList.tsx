@@ -14,7 +14,7 @@ export interface JokeType {
 
 
 export  const JokeList = () => {
-    const [jokes, setJokes] = useState([]);
+    const [jokes, setJokes] = useState<JokeType[]>([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
 
