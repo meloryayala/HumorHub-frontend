@@ -10,19 +10,15 @@ export const metadata: Metadata = {
     description: 'A quick break for humor',
 }
 
-export default function RootLayout({
-                                       children,
-                                   }: {
+export default function RootLayout({children}: {
     children: React.ReactNode
 }) {
     return (
         <html lang="en">
         <body className={inter.className}>
-        <div className="bg-secondary h-[100vh] w-[100vw] flex flex-col place-content-center">
-            <div className="mx-[15%]">
+        <div className="bg-background">
             <Header/>
             {children}
-            </div>
         </div>
         </body>
         </html>

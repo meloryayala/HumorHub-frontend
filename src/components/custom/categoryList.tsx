@@ -30,7 +30,7 @@ export const CategoryList = () => {
     }, [])
 
     return (
-        <div>
+        <div className="ml-[7%]">
             {error && error}
             {loading && loading}
             <div className="flex">

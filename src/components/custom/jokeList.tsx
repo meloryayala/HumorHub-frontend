@@ -34,7 +34,7 @@ export  const JokeList = () => {
     }, [])
 
   return(
-      <div className="flex">
+      <div className="flex ml-[7%]">
           {error && error}
           {loading && loading}
           {
