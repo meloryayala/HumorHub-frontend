@@ -3,6 +3,7 @@
 import {Button} from "@/components/ui/button";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area";
 
 export interface CategoryType {
     id: number;
@@ -33,17 +34,23 @@ export const CategoryList = () => {
         <div className="ml-[7%]">
             {error && error}
             {loading && loading}
-                <div className="flex gap-x-2">
-                    <Button variant="outline" className="bg-secondary font-bold">
-                        🏷️ All categories
-                    </Button>
-
-                    {categories.map(category => (
-                        <Button key={category.name} variant="outline" className="bg-secondary font-bold">
-                            {category.name}
+            <ScrollArea className="whitespace-nowrap">
+                <div className="relative overflow-hidden w-full my-2">
+                    <div className="flex w-full gap-x-2">
+                        <Button variant="outline" className="bg-secondary font-bold flex-shrink-0 overflow-hidden">
+                            🏷️ All categories
                         </Button>
-                    ))}
+
+                        {categories.map(category => (
+                            <Button key={category.name} variant="outline"
+                                    className="bg-secondary font-bold flex-shrink-0 overflow-hidden">
+                                {category.name}
+                            </Button>
+                        ))}
+                    </div>
                 </div>
+                <ScrollBar orientation="horizontal" />
+            </ScrollArea>
         </div>
     );
 };

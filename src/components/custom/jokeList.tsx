@@ -37,11 +37,11 @@ export  const JokeList = () => {
       <div className="mx-[7%]">
           {error && error}
           {loading && loading}
-          <div className="grid grid-cols-1 gap-y-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {
               jokes.map(joke => (
                   <Card key={joke.id} className="">
-                      <CardContent className="p-8">
+                      <CardContent className="flex flex-col gap-y-1 p-8">
                           <p className="font-bold">{joke.question}</p>
                           <p className="">{joke.answer}</p>
                       </CardContent>
