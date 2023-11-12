@@ -7,17 +7,17 @@
         --background: 30, 13%, 94%;
         --foreground: 0 0% 4%;
 
-        --card: 0 0% 4%;
-        --card-foreground: 0 0% 100%;
+        --card: 30, 13%, 94%;
+        --card-foreground: 0 0% 4%;
 
-        --popover: 0 0% 4%;
-        --popover-foreground: 0 0% 100%;
+        --popover: 30, 13%, 94%;
+        --popover-foreground: 0 0% 4%;
 
-        --primary: 252 59% 48%;
+        --primary: 44, 89%, 51%;
         --primary-light: 252, 100%, 69%, 1;
-        --primary-foreground: 0 0% 100%;
+        --primary-foreground: 0 0% 4%;
 
-        --secondary: 270, 78%, 84%;
+        --secondary: 44, 78%, 84%;
         --secondary-foreground: 0 0% 100%;
 
         --muted: 0 0% 9%;

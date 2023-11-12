@@ -2,14 +2,14 @@
 
 import {useEffect, useState} from "react";
 import axios from "axios";
-import type {CategoryType} from "@/components/custom/categoryList";
+import {Card, CardContent} from "@/components/ui/card";
 
 export interface JokeType {
     id: number;
     question: string;
     answer: string;
     categoryId: number;
-    category: CategoryType;
+    categoryName: string;
 }
 
 
@@ -34,14 +34,21 @@ export  const JokeList = () => {
     }, [])
 
   return(
-      <div className="flex ml-[7%]">
+      <div className="mx-[7%]">
           {error && error}
           {loading && loading}
+          <div className="grid grid-cols-1 gap-y-6">
           {
               jokes.map(joke => (
-                  joke.question
+                  <Card key={joke.id} className="">
+                      <CardContent className="p-8">
+                          <p className="font-bold">{joke.question}</p>
+                          <p className="">{joke.answer}</p>
+                      </CardContent>
+                  </Card>
               ))
           }
+          </div>
       </div>
   )
 };

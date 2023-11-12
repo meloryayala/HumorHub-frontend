@@ -33,17 +33,17 @@ export const CategoryList = () => {
         <div className="ml-[7%]">
             {error && error}
             {loading && loading}
-            <div className="flex">
-                <Button variant="outline">
-                    🏷️ Category name
-                </Button>
-
-                {categories.map(category => (
-                    <Button key={category.name} variant="outline">
-                        {category.name}
+                <div className="flex gap-x-2">
+                    <Button variant="outline" className="bg-secondary font-bold">
+                        🏷️ All categories
                     </Button>
-                ))}
-            </div>
+
+                    {categories.map(category => (
+                        <Button key={category.name} variant="outline" className="bg-secondary font-bold">
+                            {category.name}
+                        </Button>
+                    ))}
+                </div>
         </div>
     );
 };
