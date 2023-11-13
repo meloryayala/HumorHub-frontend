@@ -9,6 +9,9 @@ const inter = Plus_Jakarta_Sans({subsets: ['latin']})
 export const metadata: Metadata = {
     title: 'HumorHub',
     description: 'A quick break for humor',
+    icons: {
+        icon: '/icon.png',
+    },
 }
 
 export default function RootLayout({children}: {
