@@ -3,7 +3,7 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {Card, CardContent} from "@/components/ui/card";
-import useFilterContext from "@/hooks/useFilterContext";
+import {useSearchParams } from 'next/navigation';
 
 export interface JokeType {
     id: number;
@@ -13,13 +13,14 @@ export interface JokeType {
     categoryName: string;
 }
 
-
 export  const JokeList = () => {
     const [jokes, setJokes] = useState<JokeType[]>([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
+    const searchParams = useSearchParams();
+    const category = searchParams.get('category');
 
-    const {filter} = useFilterContext();
+    console.log(category)
 
     const getData = (URL: string) =>  {
         axios.get(URL)
@@ -33,8 +34,8 @@ export  const JokeList = () => {
     }
 
     useEffect(() => {
-        getData(filter ? `https://backend.melory.codery.ch/joke?category=${filter}` : 'https://backend.melory.codery.ch/joke')
-    }, [filter])
+        getData(category === null ? 'https://backend.melory.codery.ch/joke' : `https://backend.melory.codery.ch/joke?category=${category}`)
+    }, [category])
 
   return(
       <div className="mx-[7%]">

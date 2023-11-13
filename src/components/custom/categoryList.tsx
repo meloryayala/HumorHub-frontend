@@ -1,11 +1,12 @@
 "use client"
 
 import {Button} from "@/components/ui/button";
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area";
 import {CategoryIcons} from "@/Contants/constans";
-import useFilterContext from "@/hooks/useFilterContext";
+import Link from "next/link";
+import {useSearchParams} from "next/navigation";
 
 export interface CategoryType {
     id: number;
@@ -16,10 +17,8 @@ export const CategoryList = () => {
     const [categories, setCategories] = useState<CategoryType[]>([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
-
-    const {setFilter} = useFilterContext();
-
-
+    const searchParams = useSearchParams();
+    const activeCategory = searchParams.get('category');
 
     const getData = (URL: string) => {
         axios.get(URL)
@@ -33,12 +32,8 @@ export const CategoryList = () => {
     }
 
     useEffect(() => {
-        getData("https://backend.melory.codery.ch/category")
+        getData("https://backend.melory.codery.ch/category");
     }, [])
-
-    const handleCategoryClick = (categoryName: string) => {
-        setFilter(categoryName)
-    }
 
     return (
         <div className="ml-[7%]">
@@ -47,21 +42,28 @@ export const CategoryList = () => {
             <ScrollArea className="whitespace-nowrap">
                 <div className="relative overflow-hidden w-full my-2">
                     <div className="flex w-full gap-x-2">
-                        <Button variant="outline" className="bg-secondary font-bold flex-shrink-0 overflow-hidden">
-                            🏷️ All categories
-                        </Button>
+                        {!loading &&
+                            <Button
+                                variant="outline"
+                                className={`bg-secondary font-bold flex-shrink-0 overflow-hidden ${activeCategory === null && "bg-foreground text-background cursor-not-allowed"}`}
+                            >
+                                <Link href="/">
+                                🏷️ All categories
+                                </Link>
+                            </Button>}
 
                         {categories.map(category => (
                             <Button key={category.name} variant="outline"
-                                    className="bg-secondary font-bold flex-shrink-0 overflow-hidden"
-                                    onClick={() => handleCategoryClick(category.name)}
+                                    className={`bg-secondary font-bold flex-shrink-0 overflow-hidden ${category.name === activeCategory && "bg-foreground text-background cursor-not-allowed"}`}
                             >
-                                {CategoryIcons[category.name.toLowerCase() as keyof typeof CategoryIcons]} {category.name}
+                                <Link href={`/jokes?category=${category.name}`}>
+                                    {CategoryIcons[category.name.toLowerCase() as keyof typeof CategoryIcons]} {category.name}
+                                </Link>
                             </Button>
                         ))}
                     </div>
                 </div>
-                <ScrollBar orientation="horizontal" />
+                <ScrollBar orientation="horizontal"/>
             </ScrollArea>
         </div>
     );
