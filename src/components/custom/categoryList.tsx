@@ -1,10 +1,11 @@
 "use client"
 
 import {Button} from "@/components/ui/button";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area";
 import {CategoryIcons} from "@/Contants/constans";
+import useFilterContext from "@/hooks/useFilterContext";
 
 export interface CategoryType {
     id: number;
@@ -15,6 +16,10 @@ export const CategoryList = () => {
     const [categories, setCategories] = useState<CategoryType[]>([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
+
+    const {setFilter} = useFilterContext();
+
+
 
     const getData = (URL: string) => {
         axios.get(URL)
@@ -31,8 +36,8 @@ export const CategoryList = () => {
         getData("https://backend.melory.codery.ch/category")
     }, [])
 
-    const handleCategoryClick = () => {
-
+    const handleCategoryClick = (categoryName: string) => {
+        setFilter(categoryName)
     }
 
     return (
@@ -49,6 +54,7 @@ export const CategoryList = () => {
                         {categories.map(category => (
                             <Button key={category.name} variant="outline"
                                     className="bg-secondary font-bold flex-shrink-0 overflow-hidden"
+                                    onClick={() => handleCategoryClick(category.name)}
                             >
                                 {CategoryIcons[category.name.toLowerCase() as keyof typeof CategoryIcons]} {category.name}
                             </Button>

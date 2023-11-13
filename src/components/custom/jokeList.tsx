@@ -3,6 +3,7 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {Card, CardContent} from "@/components/ui/card";
+import useFilterContext from "@/hooks/useFilterContext";
 
 export interface JokeType {
     id: number;
@@ -18,6 +19,8 @@ export  const JokeList = () => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
 
+    const {filter} = useFilterContext();
+
     const getData = (URL: string) =>  {
         axios.get(URL)
             .then(response => {
@@ -30,8 +33,8 @@ export  const JokeList = () => {
     }
 
     useEffect(() => {
-        getData("https://backend.melory.codery.ch/joke")
-    }, [])
+        getData(filter ? `https://backend.melory.codery.ch/joke?category=${filter}` : 'https://backend.melory.codery.ch/joke')
+    }, [filter])
 
   return(
       <div className="mx-[7%]">
