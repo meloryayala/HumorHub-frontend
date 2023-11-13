@@ -20,8 +20,6 @@ export  const JokeList = () => {
     const searchParams = useSearchParams();
     const category = searchParams.get('category');
 
-    console.log(category)
-
     const getData = (URL: string) =>  {
         axios.get(URL)
             .then(response => {
@@ -44,7 +42,7 @@ export  const JokeList = () => {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {
               jokes.map(joke => (
-                  <Card key={joke.id} className="">
+                  <Card key={joke.id}>
                       <CardContent className="flex flex-col gap-y-1 p-8">
                           <p className="font-bold">{joke.question}</p>
                           <p className="">{joke.answer}</p>
