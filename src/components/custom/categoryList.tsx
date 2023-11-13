@@ -4,6 +4,7 @@ import {Button} from "@/components/ui/button";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area";
+import {CategoryIcons} from "@/Contants/constans";
 
 export interface CategoryType {
     id: number;
@@ -30,6 +31,10 @@ export const CategoryList = () => {
         getData("https://backend.melory.codery.ch/category")
     }, [])
 
+    const handleCategoryClick = () => {
+
+    }
+
     return (
         <div className="ml-[7%]">
             {error && error}
@@ -43,8 +48,9 @@ export const CategoryList = () => {
 
                         {categories.map(category => (
                             <Button key={category.name} variant="outline"
-                                    className="bg-secondary font-bold flex-shrink-0 overflow-hidden">
-                                {category.name}
+                                    className="bg-secondary font-bold flex-shrink-0 overflow-hidden"
+                            >
+                                {CategoryIcons[category.name.toLowerCase() as keyof typeof CategoryIcons]} {category.name}
                             </Button>
                         ))}
                     </div>
