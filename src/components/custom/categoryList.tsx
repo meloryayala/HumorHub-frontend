@@ -45,7 +45,7 @@ export const CategoryList = () => {
                         {!loading &&
                             <Button
                                 variant="outline"
-                                className={`bg-secondary font-bold flex-shrink-0 overflow-hidden md:hover:bg-secondary ${activeCategory === null && "bg-foreground text-background cursor-not-allowed"}`}
+                                className={`bg-secondary font-bold flex-shrink-0 overflow-hidden ${activeCategory === null && "bg-foreground text-background cursor-not-allowed"}`}
                             >
                                 <Link href="/">
                                 🏷️ All categories
@@ -54,7 +54,7 @@ export const CategoryList = () => {
 
                         {categories.map(category => (
                             <Button key={category.name} variant="outline"
-                                    className={`bg-secondary font-bold flex-shrink-0 overflow-hidden md:hover:bg-secondary ${category.name === activeCategory && "bg-foreground text-background cursor-not-allowed"}`}
+                                    className={`bg-secondary font-bold flex-shrink-0 overflow-hidden ${category.name === activeCategory && "bg-foreground text-background cursor-not-allowed"}`}
                             >
                                 <Link href={`/jokes?category=${category.name}`}>
                                     {CategoryIcons[category.name.toLowerCase() as keyof typeof CategoryIcons]} {category.name}
