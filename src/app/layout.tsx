@@ -2,6 +2,7 @@ import type {Metadata} from 'next'
 import {Plus_Jakarta_Sans} from 'next/font/google'
 import './globals.css'
 import Header from "@/components/custom/header";
+import FilterProvider from "@/context/filterProvider";
 
 const inter = Plus_Jakarta_Sans({subsets: ['latin']})
 
@@ -16,10 +17,12 @@ export default function RootLayout({children}: {
     return (
         <html lang="en">
         <body className={inter.className}>
-        <div className="bg-background">
-            <Header/>
-            {children}
-        </div>
+        <FilterProvider>
+            <div className="bg-background">
+                <Header/>
+                {children}
+            </div>
+        </FilterProvider>
         </body>
         </html>
     )
