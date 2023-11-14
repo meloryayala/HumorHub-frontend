@@ -43,6 +43,7 @@ Desktop                     |  Mobile                      |
 1. [✔️] Database planning
 2. [✔️] API design & development
 3. [✔️] Frontend mobile & desktop
+4. [   ] Features backlog
 
 <br> <br>
 
