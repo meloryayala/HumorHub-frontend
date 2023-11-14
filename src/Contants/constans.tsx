@@ -9,4 +9,5 @@ export enum CategoryIcons {
   love = "💕",
   music = "🎵",
   internet = "🌐",
+  beauty = "💅",
 }

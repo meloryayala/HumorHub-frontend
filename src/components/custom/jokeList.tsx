@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {Card, CardContent} from "@/components/ui/card";
 import {useSearchParams } from 'next/navigation';
+import Loading from "@/components/custom/loading";
 
 export interface JokeType {
     id: number;
@@ -16,18 +17,21 @@ export interface JokeType {
 export  const JokeList = () => {
     const [jokes, setJokes] = useState<JokeType[]>([]);
     const [error, setError] = useState("");
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState<number | null>(1);
     const searchParams = useSearchParams();
     const category = searchParams.get('category');
 
     const getData = (URL: string) =>  {
+        setLoading(90);
         axios.get(URL)
             .then(response => {
+                setLoading(100);
                 setJokes(response.data);
-                setLoading(false);
+                setLoading(null);
             }).catch(error => {
-            setLoading(false);
+            setLoading(100);
             setError(error.message)
+            setLoading(null);
         })
     }
 
@@ -38,7 +42,7 @@ export  const JokeList = () => {
   return(
       <div className="mx-[7%]">
           {error && error}
-          {loading && loading}
+          {loading && <Loading progress={loading}/>}
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {
               jokes.map(joke => (
