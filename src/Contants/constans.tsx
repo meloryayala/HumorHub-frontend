@@ -3,5 +3,10 @@ export enum CategoryIcons {
   design = "🎨",
   food = "🍉",
   travel ="✈️",
-  countries= "🌍"
+  countries= "🌍",
+  office = "🏢",
+  money = "💰",
+  love = "💕",
+  music = "🎵",
+  internet = "🌐",
 }
